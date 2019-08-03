@@ -73,13 +73,13 @@ const apartamentos = [
 
 ]
 
-// Função exportada que, caso não exista produtos no banco, cria exemplos (MOCK)
+
 module.exports.checkDataBase = () => {
     apartamentosService.find({}, (err, data) => {
         if (err || data.length <= 0 || data == undefined) {
-            // Iteração com cada produto da lista produtos
+
             apartamentos.forEach(apartamento => {
-                // Salva o produto no banco
+
                 apartamento.save()
             });
             console.log("Banco criado");

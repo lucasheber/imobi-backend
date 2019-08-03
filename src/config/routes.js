@@ -1,6 +1,6 @@
 const express = require('express') //Express para criarmos as rotas
-// const chatBot = require('../api/chatBot/chatBot') //Funções para o serviço Watson
-// const chatService = require('../api/chat/chatService') //Serviço o objeto que representa a mensagem de Chat (CRUD)
+const chatBot = require('../api/chatBot/chatBot') //Funções para o serviço Watson
+const chatService = require('../api/chat/chatService') //Serviço o objeto que representa a mensagem de Chat (CRUD)
 const apartamentosService = require('../api/apartamentos/apartamentosService') //Serviço de apartamentos (CRUD)
 
 /* O modulo que será exportado, recebe um parametro, que é a instância do servidor que já
@@ -43,7 +43,7 @@ module.exports = function (server) {
     /* Gera o CRUD do chatService na rota http://localhost:3003/api/chat 
         Agora temos acesso a essa rota com GET(Obter), POST(Criar), PUT(Modificar) e DELETE(Remover).
     */
-    //chatService.register(api, '/chat')
+    chatService.register(api, '/chat')
 
     /* Gera o CRUD do apartamentosService na rota http://localhost:3003/api/apartamentos 
         Agora temos acesso a essa rota com GET(Obter), POST(Criar), PUT(Modificar) e DELETE(Remover).

@@ -12,7 +12,6 @@ const assistant = new AssistantV1({
 
 
 iniciarOuContinuarConversa = (input) => new Promise((resolve, reject) => {
-
     chatService.find({ session_id: input.session_id }, (err, data) => {
         if (err || data.length == 0 || data == undefined) {
 
@@ -33,40 +32,33 @@ iniciarOuContinuarConversa = (input) => new Promise((resolve, reject) => {
 });
 
 reconstruirIntencoesEntidadesContexto = (watsonObject) => new Promise((resolve, reject) => {
-    if (watsonObject.intents.length > 0 && watsonObject.intents[0].intent == 'Adquirir Apartamento') { 
-        allSearchs = []
+    console.clear();
+    allSearchs = []
+    allSearchs['apartamentos'] = []
 
-        for (let index = 0; index < watsonObject.entities.length; index++) {
-            if (watsonObject.entities[index].entity == 'apartamento') {
-                let search;
-                if (index + 1 < watsonObject.entities.length) {
-                    search = watsonObject.input.text.substring(
-                        watsonObject.entities[index].location[0],
-                        watsonObject.entities[index + 1].location[0]
-                    )
-                }
-                else {
-                    search = watsonObject.input.text.substring(
-                        watsonObject.entities[index].location[0]
-                    )
-                }
+    if (watsonObject.intents.length > 0 && watsonObject.intents[0].intent == 'sentimento_bem') {
 
-                allSearchs.push(new Promise((resolve, reject) => {
-                    apartamentosService.find({ "name": { "$regex": search.trim(), "$options": "i" } }, (err, data) => {         
-                        if (err || data.length == 0 || data == undefined) {
-                            watsonObject.output.text[0] += ", Este apartamentos não foi encontrado.";
-                            resolve(watsonObject);
-                        }
-                        else {
-                            watsonObject.context.hasOwnProperty("itens") && watsonObject.context.itens != '' ? response.context.itens.push(data[0]) : response.context.itens = [data[0]];
-                            watsonObject.output.text[0] += ` ${data[0].name}, `;
-                            resolve(watsonObject);
-                        }
-                    });
-                }));
-            }
+        if (watsonObject.context.deAcordo == true) {
+            //console.log(watsonObject.context.deAcordo);
         }
     }
+ 
+
+    if (watsonObject.context.codigo != undefined) {
+        apartamentosService.find({ "codigo": watsonObject.context.codigo }, (err, data) => {
+            if (err || data.length == 0 || data == undefined) {
+                watsonObject.output.text[0] += ", Este apartamento não foi encontrado.";
+                resolve(watsonObject);
+            }
+            else {
+                watsonObject.context.hasOwnProperty("itens") && watsonObject.context.itens != '' ? watsonObject.context.itens.push(data[0]) : watsonObject.context.itens = [data[0]];
+                watsonObject.output.text[0] += ` ${data[0].codigo}, `;
+                resolve(watsonObject);
+            }
+        });
+    }
+
+    resolve(watsonObject);
 })
 
 module.exports.analisarConstruirMensagem = (input) => new Promise((resolve, reject) => {
@@ -79,21 +71,23 @@ module.exports.analisarConstruirMensagem = (input) => new Promise((resolve, reje
             input: user.input
         })
             .then((res) => {
-                user.messages.push({
-                    message: input.message.text
-                });
-
-                resp.output.text.forEach(message => {
+                reconstruirIntencoesEntidadesContexto(res).then((resp) => {
                     user.messages.push({
-                        message: message,
-                        base: 'received'
+                        message: input.message.text
                     });
-                });
 
-                user.context = resp.context;
+                    resp.output.text.forEach(message => {
+                        user.messages.push({
+                            message: message,
+                            base: 'received'
+                        });
+                    });
 
-                resolve(user);
+                    user.context = resp.context;
 
+                    resolve(user);
+
+                })
             })
     })
 });

@@ -14,8 +14,7 @@ module.exports = function (server) {
 
     // rota de inserção (manualmente construida) de mensagem no banco de dados chatService
     api.post('/chat', (req, res) => { // http://localhost:3003/api/chat (POST)
-        console.log('Requisicao');
-        
+
         req.body.message = req.body.message ? req.body.message : '';
 
         // Chama a função que vai analisar a mensagem do usuário, e responder

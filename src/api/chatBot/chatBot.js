@@ -32,33 +32,28 @@ iniciarOuContinuarConversa = (input) => new Promise((resolve, reject) => {
 });
 
 reconstruirIntencoesEntidadesContexto = (watsonObject) => new Promise((resolve, reject) => {
-    console.clear();
-    allSearchs = []
-    allSearchs['apartamentos'] = []
-
-    if (watsonObject.intents.length > 0 && watsonObject.intents[0].intent == 'sentimento_bem') {
-
-        if (watsonObject.context.deAcordo == true) {
-            //console.log(watsonObject.context.deAcordo);
-        }
-    }
- 
 
     if (watsonObject.context.codigo != undefined) {
+
         apartamentosService.find({ "codigo": watsonObject.context.codigo }, (err, data) => {
             if (err || data.length == 0 || data == undefined) {
-                watsonObject.output.text[0] += ", Este apartamento não foi encontrado.";
+
+                watsonObject.output.text[0] = `O codigo ${watsonObject.context.codigo} do apartamento não foi encontrado.`;
+                watsonObject.context.codigo = undefined
                 resolve(watsonObject);
             }
             else {
-                watsonObject.context.hasOwnProperty("itens") && watsonObject.context.itens != '' ? watsonObject.context.itens.push(data[0]) : watsonObject.context.itens = [data[0]];
-                watsonObject.output.text[0] += ` ${data[0].codigo}, `;
+
+                watsonObject.context.hasOwnProperty("itens") && watsonObject.context.itens != '' ? watsonObject.context.itens = data[0] : watsonObject.context.itens = data[0];
+                //if (watsonObject.output.text[0] != 'Veja os detalhes aqui! Obrigado')
+                watsonObject.output.text[0] = `Clique em 'Meu Apartamento' no canto superior para ver mais detalhes.`;
+                watsonObject.context.codigo = undefined
                 resolve(watsonObject);
             }
         });
+    } else {
+        resolve(watsonObject);
     }
-
-    resolve(watsonObject);
 })
 
 module.exports.analisarConstruirMensagem = (input) => new Promise((resolve, reject) => {

@@ -61,16 +61,47 @@ const apartamentos = [
         imgUrl: "http://www.imoveisam.com.br/fotos_imoveis/maior/a154392636f3d723c31d917fdb6d3043.jpg"
     }),
 
+    /** CASAS */
     new apartamentosService({
-        codigo: "337-07/19",
-        type: "Apartamento",
+        codigo: "329-04/19",
+        type: "Casa",
         city: "Barbacena",
-        address: "RUA MARANHÃO",
-        value: "220000.00",
-        description: "COM 03 (TRÊS) QUARTOS, SALA AMPLA, COZINHA, BANHEIRO SOCIAL E ÁREA DE SERVIÇOS.\r\nSEM GARAGEM.",
-        imgUrl: "http://www.imoveisam.com.br/fotos_imoveis/maior/70638fcdd32cd9f35c1191d873fcd646.jpg"
+        address: "RUA FRANCISCO DA SILVA FORTES",
+        value: "330000.00",
+        description: "CASA COM 03 (TRÊS) QUARTOS, SALA, COZINHA, BANHEIRO, ÁREA DE SERVIÇOS, QUINTAL E GARAGEM.",
+        imgUrl: "http://www.imoveisam.com.br/fotos_imoveis/maior/d7aa954aa1113721a6309ceb6d8205e3.jpg"
     }),
 
+    new apartamentosService({
+        codigo: "187-04/16",
+        type: "Casa",
+        city: "Barbacena",
+        address: "RUA CASSIMIRO DE ABREU, Nº 19",
+        value: "200000.00",
+        description: "CASA SIMPLES - COM DOIS QUARTOS, SALA, COZINHA E BANHEIRO.\r\nTERRENO COM APROXIMADAMENTE 350,00mts.",
+        imgUrl: "http://www.imoveisam.com.br/fotos_imoveis/maior/94206d735801169f4d434ed33d239885.jpg"
+    }),
+    
+    new apartamentosService({
+        codigo: "310-09/18",
+        type: "Casa",
+        city: "Barbacena",
+        address: "RUA FRANCISCO AFONSO GABRIEL",
+        value: "950000.00",
+        description: "COM 03 (TRÊS) QUARTOS, SENDO UM SUÍTE, TODOS COM ARMÁRIOS, DUAS SALAS AMPLAS, SALA DE JANTAR, DOIS BANHEIROS SOCIAIS, SACADA, ESCRITÓRIO COM BANHEIRO, ÁREA EXTERNA CIMENTADA, DOIS CÔMODOS DE DESPEJO E GARAGEM PARA 04 (QUATRO) CARROS.\r\n\r\nÁREA CONSTRUÍDA DE 332,00mts.\r\n\r\nEXCELENTE LOCALIZAÇÃO.",
+        imgUrl: "http://www.imoveisam.com.br/fotos_imoveis/maior/9c56838c6d0095a3143f2dc1c6386572.jpg"
+    }),
+
+    new apartamentosService({
+        codigo: "276-03/18",
+        type: "Casa",
+        city: "Barbacena",
+        address: "RUA TANCREDO ESTEVES",
+        value: "450000.00",
+        description: "COM 03 (TRÊS) QUARTOS, SENDO UM SUÍTE, SALA DE VISITAS, SALA DE ESTAR COM LAVABO (CONVERSÍVEL PARA QUARTO), COPA, COZINHA, BANHEIRO SOCIAL COM HIDROMASSAGEM, ÁREA ANEXA À COZINHA COM FOGÃO COOKTOP, LAVANDERIA COM BANHEIRO, GARAGEM PARA 02 CARROS E QUINTAL.",
+        imgUrl: "http://www.imoveisam.com.br/fotos_imoveis/maior/88fbbcb50875cf5cbca76f7f1c8c9b73.jpg"
+    }),
+    
 ]
 
 

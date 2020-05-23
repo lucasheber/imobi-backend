@@ -17,7 +17,7 @@
     "express": "^4.14",
     "express-query-int": "^1.0",
     "ibm-watson": "^4.1",
-    "mongoose": "^4.7",
+    "mongoose": "^5.7",
     "node-restful": "^0.2",
     "nodemon": "^1.11",
     "pm2": "^2.1"

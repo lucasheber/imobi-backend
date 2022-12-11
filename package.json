@@ -14,7 +14,7 @@
   "dependencies": {
     "body-parser": "^1.15",
     "dotenv": "^6.2",
-    "express": "^4.14",
+    "express": "^4.17",
     "express-query-int": "^1.0",
     "ibm-watson": "^4.1",
     "mongoose": "^5.7.5",
